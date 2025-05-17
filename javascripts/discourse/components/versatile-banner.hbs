@@ -1,6 +1,6 @@
 {{#if this.shouldShow}}
   {{#unless this.bannerClosed}}
-    <div class="banner-box">
+    <div class="banner-box" {{did-insert this.didInsertCarousel}}>
       <div class="container">
         <div class="button-container">
           {{#if (theme-setting "dismissible")}}
@@ -33,13 +33,21 @@
           }}
         >
           <div class="row">
-            {{#each this.columnData as |data|}}
-              <VersatileBannerColumn
-                @columnContent={{data.content}}
-                @icon={{data.icon}}
-                @columnClass={{data.class}}
-              />
-            {{/each}}
+            <div class="carousel" id="versatile-carousel">
+              <button class="carousel-btn prev" type="button" aria-label="Previous slide">&#10094;</button>
+              <div class="carousel-track">
+                {{#each this.columnData as |data index|}}
+                  <div class="carousel-slide{{if (eq index 0) ' active'}}">
+                    <VersatileBannerColumn
+                      @columnContent={{data.content}}
+                      @icon={{data.icon}}
+                      @columnClass={{data.class}}
+                    />
+                  </div>
+                {{/each}}
+              </div>
+              <button class="carousel-btn next" type="button" aria-label="Next slide">&#10095;</button>
+            </div>
           </div>
         </div>
       </div>

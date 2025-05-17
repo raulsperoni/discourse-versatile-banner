@@ -8,6 +8,36 @@ import { defaultHomepage } from "discourse/lib/utilities";
 import { i18n } from "discourse-i18n";
 
 export default class VersatileBanner extends Component {
+  // Carousel logic
+  @action
+  didInsertCarousel(element) {
+    const carousel = element.querySelector('#versatile-carousel');
+    if (!carousel) return;
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+    const prevBtn = carousel.querySelector('.carousel-btn.prev');
+    const nextBtn = carousel.querySelector('.carousel-btn.next');
+    let currentIndex = 0;
+
+    function updateSlides(newIndex) {
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === newIndex);
+      });
+      currentIndex = newIndex;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      let idx = currentIndex - 1;
+      if (idx < 0) idx = slides.length - 1;
+      updateSlides(idx);
+    });
+    nextBtn.addEventListener('click', () => {
+      let idx = currentIndex + 1;
+      if (idx >= slides.length) idx = 0;
+      updateSlides(idx);
+    });
+  }
+
   @service router;
   @service site;
   @service currentUser;
