@@ -65,6 +65,89 @@ acceptance("Versatile Banner - Routing", function () {
   });
 });
 
+acceptance("Versatile Banner - Category Icon Rendering", function () {
+  test("renders absolute image URL as <img>", async function (assert) {
+    settings.show_for_anon = true;
+    settings.first_column_category_id = 7;
+    // Simulate category with absolute URL
+    server.create("category", {
+      id: 7,
+      name: "Image Absolute",
+      uploaded_logo: { url: "https://example.com/image.png" },
+    });
+    await visit("/");
+    assert.dom(".category-icon img").exists("renders absolute image URL as <img>");
+  });
+  test("renders relative image URL as <img>", async function (assert) {
+    settings.show_for_anon = true;
+    settings.first_column_category_id = 8;
+    server.create("category", {
+      id: 8,
+      name: "Image Relative",
+      uploaded_logo: { url: "/uploads/example.png" },
+    });
+    await visit("/");
+    assert.dom(".category-icon img").exists("renders relative image URL as <img>");
+  });
+  test("renders color code as color dot", async function (assert) {
+    settings.show_for_anon = true;
+    settings.first_column_category_id = 9;
+    server.create("category", {
+      id: 9,
+      name: "Color Dot",
+      uploaded_logo: null,
+      color: "#ff0000",
+    });
+    await visit("/");
+    assert.dom(".category-icon .color-dot").exists("renders color code as color dot");
+  });
+  test("renders icon string as d-icon", async function (assert) {
+    settings.show_for_anon = true;
+    settings.first_column_category_id = 10;
+    server.create("category", {
+      id: 10,
+      name: "Icon String",
+      uploaded_logo: null,
+      color: null,
+      icon: "shield-alt",
+    });
+    await visit("/");
+    assert.dom(".category-icon .d-icon").exists("renders icon string as d-icon");
+  });
+});
+
+acceptance("Versatile Banner - Category Info/Content Fallback", function () {
+  test("renders category info if content is empty", async function (assert) {
+    settings.show_for_anon = true;
+    settings.first_column_content = "";
+    settings.first_column_category_id = 11;
+    server.create("category", {
+      id: 11,
+      name: "Category Only",
+      uploaded_logo: { url: "/uploads/example2.png" },
+      description: "Description here",
+    });
+    await visit("/");
+    assert.dom(".category-info").exists("renders category info if content is empty");
+    assert.dom(".category-info .category-title").hasText("Category Only");
+    assert.dom(".category-info .category-about").hasTextContaining("Description here");
+  });
+  test("renders content if present, not category info", async function (assert) {
+    settings.show_for_anon = true;
+    settings.first_column_content = "<h3>Custom Content</h3>";
+    settings.first_column_category_id = 12;
+    server.create("category", {
+      id: 12,
+      name: "Category Hidden",
+      uploaded_logo: { url: "/uploads/example3.png" },
+      description: "Should not show",
+    });
+    await visit("/");
+    assert.dom(".single-box h3").hasText("Custom Content");
+    assert.dom(".category-info").doesNotExist("does not render category info if content present");
+  });
+});
+
 acceptance("Versatile Banner - Visibility", function () {
   test("banner can be expanded", async function (assert) {
     settings.show_for_anon = true;
