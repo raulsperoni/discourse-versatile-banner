@@ -55,28 +55,119 @@ export default class VersatileBanner extends Component {
   collapsedFromCookie = this.cookieCollapsed
     ? JSON.parse(this.cookieCollapsed).collapsed
     : null;
-  columnData = [
-    {
-      content: settings.first_column_content,
-      class: "first_column",
-      icon: convertIconClass(settings.first_column_icon),
-    },
-    {
-      content: settings.second_column_content,
-      class: "second_column",
-      icon: convertIconClass(settings.second_column_icon),
-    },
-    {
-      content: settings.third_column_content,
-      class: "third_column",
-      icon: convertIconClass(settings.third_column_icon),
-    },
-    {
-      content: settings.fourth_column_content,
-      class: "fourth_column",
-      icon: convertIconClass(settings.fourth_column_icon),
-    },
-  ];
+  get columnData() {
+    const columns = [
+      {
+        content: settings.first_column_content,
+        class: "first_column",
+        category: this.firstColumnCategory,
+        categoryTitle: this.firstColumnCategoryTitle,
+        categoryIcon: this.firstColumnCategoryIcon,
+        categoryAbout: this.firstColumnCategoryAbout,
+      },
+      {
+        content: settings.second_column_content,
+        class: "second_column",
+        category: this.secondColumnCategory,
+        categoryTitle: this.secondColumnCategoryTitle,
+        categoryIcon: this.secondColumnCategoryIcon,
+        categoryAbout: this.secondColumnCategoryAbout,
+      },
+      {
+        content: settings.third_column_content,
+        class: "third_column",
+        category: this.thirdColumnCategory,
+        categoryTitle: this.thirdColumnCategoryTitle,
+        categoryIcon: this.thirdColumnCategoryIcon,
+        categoryAbout: this.thirdColumnCategoryAbout,
+      },
+      {
+        content: settings.fourth_column_content,
+        class: "fourth_column",
+        category: this.fourthColumnCategory,
+        categoryTitle: this.fourthColumnCategoryTitle,
+        categoryIcon: this.fourthColumnCategoryIcon,
+        categoryAbout: this.fourthColumnCategoryAbout,
+      },
+    ];
+    // Only return columns where a category is found
+    return columns.filter(col => col.category);
+  }
+
+  // Category lookup helpers for each column
+  get firstColumnCategory() {
+    const id = settings.first_column_category_id;
+    console.log('[VersatileBanner] first_column_category_id:', id);
+    if (!id || !this.site.categories) return null;
+    const cat = this.site.categories.find(cat => cat.id === id);
+    console.log('[VersatileBanner] firstColumnCategory:', cat);
+    return cat;
+  }
+  get firstColumnCategoryTitle() {
+    return this.firstColumnCategory?.name || "";
+  }
+  get firstColumnCategoryIcon() {
+    // Prefer uploaded_logo, then color, then icon
+    return this.firstColumnCategory?.uploaded_logo?.url || this.firstColumnCategory?.color || this.firstColumnCategory?.icon || "";
+  }
+  get firstColumnCategoryAbout() {
+    return this.firstColumnCategory?.description || this.firstColumnCategory?.topic_html || "";
+  }
+
+  get secondColumnCategory() {
+    const id = settings.second_column_category_id;
+    console.log('[VersatileBanner] second_column_category_id:', id);
+    if (!id || !this.site.categories) return null;
+    const cat = this.site.categories.find(cat => cat.id === id);
+    console.log('[VersatileBanner] secondColumnCategory:', cat);
+    return cat;
+  }
+  get secondColumnCategoryTitle() {
+    return this.secondColumnCategory?.name || "";
+  }
+  get secondColumnCategoryIcon() {
+    return this.secondColumnCategory?.uploaded_logo?.url || this.secondColumnCategory?.color || this.secondColumnCategory?.icon || "";
+  }
+  get secondColumnCategoryAbout() {
+    return this.secondColumnCategory?.description || this.secondColumnCategory?.topic_html || "";
+  }
+
+  get thirdColumnCategory() {
+    const id = settings.third_column_category_id;
+    console.log('[VersatileBanner] third_column_category_id:', id);
+    if (!id || !this.site.categories) return null;
+    const cat = this.site.categories.find(cat => cat.id === id);
+    console.log('[VersatileBanner] thirdColumnCategory:', cat);
+    return cat;
+  }
+  get thirdColumnCategoryTitle() {
+    return this.thirdColumnCategory?.name || "";
+  }
+  get thirdColumnCategoryIcon() {
+    return this.thirdColumnCategory?.uploaded_logo?.url || this.thirdColumnCategory?.color || this.thirdColumnCategory?.icon || "";
+  }
+  get thirdColumnCategoryAbout() {
+    return this.thirdColumnCategory?.description || this.thirdColumnCategory?.topic_html || "";
+  }
+
+  get fourthColumnCategory() {
+    const id = settings.fourth_column_category_id;
+    console.log('[VersatileBanner] fourth_column_category_id:', id);
+    if (!id || !this.site.categories) return null;
+    const cat = this.site.categories.find(cat => cat.id === id);
+    console.log('[VersatileBanner] fourthColumnCategory:', cat);
+    return cat;
+  }
+  get fourthColumnCategoryTitle() {
+    return this.fourthColumnCategory?.name || "";
+  }
+  get fourthColumnCategoryIcon() {
+    return this.fourthColumnCategory?.uploaded_logo?.url || this.fourthColumnCategory?.color || this.fourthColumnCategory?.icon || "";
+  }
+  get fourthColumnCategoryAbout() {
+    return this.fourthColumnCategory?.description || this.fourthColumnCategory?.topic_html || "";
+  }
+
 
   get cookieExpirationDate() {
     if (settings.cookie_lifespan === "none") {

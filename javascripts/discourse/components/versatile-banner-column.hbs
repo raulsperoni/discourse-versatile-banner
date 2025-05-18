@@ -1,15 +1,26 @@
-{{#if (or @icon @columnContent)}}
+{{#if (or @columnContent (and @categoryTitle @categoryIcon @categoryAbout))}}
   <div class="{{@columnClass}} single-box">
-    {{#if @icon}}
-      <div class="icon">
-        {{#if this.isHttpLink}}
-          <img class="responsive-img" src={{@icon}} alt="Icon" />
-        {{else}}
-          {{d-icon @icon}}
+    {{#if (and (or @categoryTitle @categoryIcon @categoryAbout) (not @columnContent))}}
+      <div class="category-info">
+        {{#if @categoryIcon}}
+          <span class="category-icon">
+            {{#if (this.isHttpLink @categoryIcon)}}
+              <img class="responsive-img" src={{@categoryIcon}} alt="Category Icon" />
+            {{else if (this.isColorCode @categoryIcon)}}
+              <span class="color-dot" style="display:inline-block;width:18px;height:18px;border-radius:50%;background:{{@categoryIcon}};"></span>
+            {{else if (this.isIconString @categoryIcon)}}
+              {{d-icon @categoryIcon}}
+            {{/if}}
+          </span>
+        {{/if}}
+        {{#if @categoryTitle}}
+          <h3 class="category-title">{{@categoryTitle}}</h3>
+        {{/if}}
+        {{#if @categoryAbout}}
+          <p class="category-about">{{html-safe @categoryAbout}}</p>
         {{/if}}
       </div>
-    {{/if}}
-    {{#if @columnContent}}
+    {{else if @columnContent}}
       <div>
         {{html-safe @columnContent}}
       </div>

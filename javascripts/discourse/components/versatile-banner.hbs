@@ -40,8 +40,10 @@
                   <div class="carousel-slide{{if (eq index 0) ' active'}}">
                     <VersatileBannerColumn
                       @columnContent={{data.content}}
-                      @icon={{data.icon}}
                       @columnClass={{data.class}}
+                      @categoryTitle={{data.categoryTitle}}
+                      @categoryIcon={{data.categoryIcon}}
+                      @categoryAbout={{data.categoryAbout}}
                     />
                   </div>
                 {{/each}}

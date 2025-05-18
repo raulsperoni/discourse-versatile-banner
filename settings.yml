@@ -122,33 +122,11 @@ first_column_content:
 second_column_content:
   type: string
   textarea: true
-  default: |
-    <h3>Another simple box</h3>
-    <p>
-      Integer velit ante,
-      <a href="https://discourse.org">DISCOURSE</a>
-      amet tristique in, gravida at ligula. Sed gravida mauris id
-      neque vestibulum semper. Suspendisse potenti. Nam
-      nec maximus ligula. Ut eget semper est. Sed ornare
-      sit amet justo eu rutrum. Integer sit amet facilisis ipsum.
-    </p>
-    <div class="buttons" id="my-button">
-      <a href="#" class="btn btn-icon-text">My new button</a>
-    </div>
+  default: ""
 third_column_content:
   type: string
   textarea: true
-  default: |
-    <h3>Yet another simple box</h3>
-    <p>
-      Pellentesque ut lacinia nunc, eu molestie nulla.
-      Pellentesque viverra nisi urna, at hendrerit nisl
-      sodales in. Morbi auctor sodales nisi, eget aliquam
-      justo maximus in. Suspendisse a felis a massa
-      elementum pellentesque quis eget dolor. Orci varius
-      natoque penatibus et magnis dis parturient montes,
-      nascetur ridiculus mus.
-    </p>
+  default: ""
 fourth_column_content:
   type: string
   textarea: true
@@ -165,12 +143,22 @@ third_column_size:
 fourth_column_size:
   type: string
   default: ""
-first_column_icon:
-  type: string
-  default: "gear"
-second_column_icon:
-  type: string
-  default: "https://d11a6trkgmumsb.cloudfront.net/original/3X/b/3/b33be9538df3547fcf9d1a51a4637d77392ac6f9.png"
+first_column_category_id:
+  type: integer
+  default: 0
+  description: "Category ID for first column (0 = none)"
+second_column_category_id:
+  type: integer
+  default: 0
+  description: "Category ID for second column (0 = none)"
+third_column_category_id:
+  type: integer
+  default: 0
+  description: "Category ID for third column (0 = none)"
+fourth_column_category_id:
+  type: integer
+  default: 0
+  description: "Category ID for fourth column (0 = none)"
 third_column_icon:
   type: string
   default: "wrench"
