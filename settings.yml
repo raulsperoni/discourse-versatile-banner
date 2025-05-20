@@ -87,20 +87,27 @@ main_heading_content:
   type: string
   textarea: true
   default: |
-    <h2 class="x-title">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    </h2>
-    <div class="colored-line"></div>
-    <div class="description">
-      <p>
-        Nulla ullamcorper augue vel sodales pellentesque. Sed
-        vitae sapien sit amet mauris consequat malesuada.
-        Vestibulum vitae iaculis nisl, vel aliquet velit.
-        Fusce venenatis laoreet diam, non dictum nisl
-        vestibulum non.
-      </p>
+    <div class="banner-columns">
+    <div class="banner-col banner-col-image">
+      <img src="{{asset-path 'images/my-banner-image.png'}}" alt="Banner Image" class="banner-image" />
     </div>
-    <div class="colored-line"></div>
+    <div class="banner-col banner-col-content">
+      <h2 class="x-title">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </h2>
+      <div class="colored-line"></div>
+      <div class="description">
+        <p>
+          Nulla ullamcorper augue vel sodales pellentesque. Sed
+          vitae sapien sit amet mauris consequat malesuada.
+          Vestibulum vitae iaculis nisl, vel aliquet velit.
+          Fusce venenatis laoreet diam, non dictum nisl
+          vestibulum non.
+        </p>
+      </div>
+      <div class="colored-line"></div>
+    </div>
+    </div>
 first_column_content:
   type: string
   textarea: true
