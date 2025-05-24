@@ -8,6 +8,7 @@ import { defaultHomepage } from "discourse/lib/utilities";
 import { i18n } from "discourse-i18n";
 
 export default class VersatileBanner extends Component {
+
   // Carousel logic
   @action
   didInsertCarousel(element) {
