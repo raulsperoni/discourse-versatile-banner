@@ -19,6 +19,22 @@ export default class VersatileBanner extends Component {
     const prevBtn = carousel.querySelector('.carousel-btn.prev');
     const nextBtn = carousel.querySelector('.carousel-btn.next');
     let currentIndex = 0;
+    let autoMoveInterval = null;
+
+    // Get settings for auto-movement
+    const enableAutoCarousel = settings.enable_auto_carousel;
+    const autoCarouselSpeed = settings.auto_carousel_speed;
+    const pauseOnHover = settings.auto_carousel_pause_on_hover;
+
+    // Determine interval based on speed setting
+    const getIntervalTime = () => {
+      switch (autoCarouselSpeed) {
+        case 'slow': return 7000; // 7 seconds
+        case 'fast': return 3000; // 3 seconds
+        case 'medium':
+        default: return 5000; // 5 seconds
+      }
+    };
 
     function updateSlides(newIndex) {
       slides.forEach((slide, idx) => {
@@ -27,15 +43,66 @@ export default class VersatileBanner extends Component {
       currentIndex = newIndex;
     }
 
-    prevBtn.addEventListener('click', () => {
-      let idx = currentIndex - 1;
-      if (idx < 0) idx = slides.length - 1;
-      updateSlides(idx);
-    });
-    nextBtn.addEventListener('click', () => {
+    function moveNext() {
       let idx = currentIndex + 1;
       if (idx >= slides.length) idx = 0;
       updateSlides(idx);
+    }
+
+    function movePrev() {
+      let idx = currentIndex - 1;
+      if (idx < 0) idx = slides.length - 1;
+      updateSlides(idx);
+    }
+
+    // Set up auto-movement if enabled
+    if (enableAutoCarousel && slides.length > 1) {
+      const startAutoMove = () => {
+        if (autoMoveInterval) clearInterval(autoMoveInterval);
+        autoMoveInterval = setInterval(moveNext, getIntervalTime());
+      };
+
+      const stopAutoMove = () => {
+        if (autoMoveInterval) {
+          clearInterval(autoMoveInterval);
+          autoMoveInterval = null;
+        }
+      };
+
+      // Start auto-movement
+      startAutoMove();
+
+      // Pause on hover if enabled
+      if (pauseOnHover) {
+        carousel.addEventListener('mouseenter', stopAutoMove);
+        carousel.addEventListener('mouseleave', startAutoMove);
+      }
+
+      // Reset interval after manual navigation
+      const resetInterval = () => {
+        if (enableAutoCarousel) {
+          stopAutoMove();
+          startAutoMove();
+        }
+      };
+
+      // Add event listener for cleanup when component is destroyed
+      element.addEventListener('willDestroyElement', () => {
+        stopAutoMove();
+        if (pauseOnHover) {
+          carousel.removeEventListener('mouseenter', stopAutoMove);
+          carousel.removeEventListener('mouseleave', startAutoMove);
+        }
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      movePrev();
+      if (enableAutoCarousel) resetInterval?.();
+    });
+    nextBtn.addEventListener('click', () => {
+      moveNext();
+      if (enableAutoCarousel) resetInterval?.();
     });
   }
 

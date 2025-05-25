@@ -37,6 +37,22 @@ cookie_lifespan:
     - week
     - month
     - year
+enable_auto_carousel:
+  type: bool
+  default: false
+  description: When enabled, the banner carousel will automatically move between slides
+auto_carousel_speed:
+  type: enum
+  default: medium
+  choices:
+    - slow
+    - medium
+    - fast
+  description: How quickly the carousel should automatically move between slides
+auto_carousel_pause_on_hover:
+  type: bool
+  default: true
+  description: Pause the auto-movement when the user hovers over the carousel
 cookie_name:
   type: string
   default: "v1"
