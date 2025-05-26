@@ -138,6 +138,7 @@
       max-width: 600px;
       margin: 0 auto;
     }
+
   }
 
   .row {
@@ -281,16 +282,21 @@
     display: block;
   }
 
+  .banner-box {
+    padding: 10px;
+    margin-top: 10px;
+  }
+
   .banner-box .section-header .x-title {
-    padding: 15px;
-    margin-top: 1em;
+    padding: 10px;
+    margin-top: 0.5em;
   }
 
   // Drop heading below main title
   @if $dismissible == "true" or $collapsible == "true" {
     .button-container {
       button {
-        padding: 5px 5px;
+        padding: 3px 3px;
       }
 
       .d-button-label {
@@ -305,6 +311,8 @@
   .third_column,
   .fourth_column {
     width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
   }
 }
 
@@ -331,7 +339,33 @@
   justify-content: center;
   padding: 0 48px; // Add horizontal padding so arrows can sit outside
   box-sizing: border-box;
+  font-size: x-large;
+  line-height: 1.5;
 }
+
+@media screen and (max-width: 480px) {
+  .banner-box .carousel {
+    padding: 0 20px; // Keep some padding for arrows
+    font-size: large;
+    line-height: 1.2;
+  }
+  .banner-box .row .single-box {
+    padding: 0;
+  }
+  // Adjust arrow positioning for mobile
+  .banner-box .carousel-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+  .banner-box .carousel-btn.prev {
+    left: 0;
+  }
+  .banner-box .carousel-btn.next {
+    right: 0;
+  }
+}
+
 .banner-box .carousel-track {
   display: flex;
   width: 100%;
@@ -375,10 +409,10 @@
   background: rgba(0,0,0,0.7);
 }
 .banner-box .carousel-btn.prev {
-  left: -28px; // Move arrow outside carousel content
+  left: -20px; // Move arrow outside carousel content
 }
 .banner-box .carousel-btn.next {
-  right: -28px; // Move arrow outside carousel content
+  right: -20px; // Move arrow outside carousel content
 }
 
 
@@ -423,7 +457,7 @@
 
 .banner-image {
   max-width: 100%;
-  max-height: 120px;
+  //max-height: 120px;
   display: block;
 }
 
@@ -431,14 +465,21 @@
 @media (max-width: 600px) {
   .banner-columns {
     flex-direction: column;
+    padding: 10px;
   }
   .banner-col-image, .banner-col-content {
     flex: 1 1 100%;
     max-width: 100%;
+    padding: 8px;
   }
   .banner-image {
     max-width: 80vw;
     max-height: 80vw;
+    margin: 0 auto;
+  }
+  .banner-box .carousel-btn {
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -466,6 +507,7 @@
   flex-wrap: wrap;
   gap: 16px;
   margin: 20px 0;
+  font-size: medium;
 }
 
 .banner-action-button {
@@ -497,8 +539,8 @@
   }
   
   img {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     object-fit: cover;
     margin: 0;
     display: block;
@@ -516,3 +558,22 @@
 
 
 
+.category-heading {
+  display: none;
+}
+
+.featured-topics__topic-details .topic-title {
+  font-size: medium;
+}
+
+.featured-topics__topic-details .topic-author {
+  display: none;
+}
+
+.featured-topics__topic-thumbnail {
+  height: 60%;
+}
+
+.featured-topics__topic-container {
+  height: 310px;
+}
