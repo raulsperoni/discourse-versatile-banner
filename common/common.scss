@@ -206,53 +206,7 @@
 
 // Columns
 
-// First column
-@if $first_column_size == "auto" {
-  .first_column {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
-} @else {
-  .first_column {
-    width: $first_column_size;
-  }
-}
-
-// Second column
-@if $second_column_size == "auto" {
-  .second_column {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
-} @else {
-  .second_column {
-    width: $second_column_size;
-  }
-}
-
-// Third column
-@if $third_column_size == "auto" {
-  .third_column {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
-} @else {
-  .third_column {
-    width: $third_column_size;
-  }
-}
-
-// Fourth column
-@if $fourth_column_size == "auto" {
-  .fourth_column {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
-} @else {
-  .fourth_column {
-    width: $fourth_column_size;
-  }
-}
+// Column-related SCSS removed since using carousel-only approach
 
 // Full Width
 
@@ -328,91 +282,153 @@
   }
 }
 
-// Carousel styles
+// New banner carousel styles
+.banner-carousel-container {
+  width: 100%;
+  position: relative;
+}
+
 .banner-box .carousel {
   position: relative;
   width: 100%;
-  max-width: 900px;
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 48px; // Add horizontal padding so arrows can sit outside
-  box-sizing: border-box;
-  font-size: x-large;
-  line-height: 1.5;
-}
-
-@media screen and (max-width: 480px) {
-  .banner-box .carousel {
-    padding: 0 20px; // Keep some padding for arrows
-    font-size: large;
-    line-height: 1.2;
-  }
-  .banner-box .row .single-box {
-    padding: 0;
-  }
-  // Adjust arrow positioning for mobile
-  .banner-box .carousel-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 1.2rem;
-  }
-  .banner-box .carousel-btn.prev {
-    left: 0;
-  }
-  .banner-box .carousel-btn.next {
-    right: 0;
-  }
 }
 
 .banner-box .carousel-track {
-  display: flex;
+  position: relative;
   width: 100%;
   overflow: hidden;
-  position: relative;
-  min-height: 120px;
+  min-height: 200px;
 }
+
 .banner-box .carousel-slide {
-  min-width: 100%;
-  transition: opacity 0.6s, transform 0.6s;
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  left: 0;
-  top: 0;
   width: 100%;
+  min-height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  
+  &.active {
+    opacity: 1;
+    position: relative;
+  }
+  
+  // Apply dark mode styles when in dark theme
+  .dark-scheme & {
+    background-color: var(--data-dark-background-color);
+    background-image: var(--data-dark-background-image);
+  }
 }
-.banner-box .carousel-slide.active {
-  opacity: 1;
-  pointer-events: auto;
-  position: relative;
-  z-index: 2;
-  transform: none;
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+.banner-main-image {
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+// Carousel controls
 .banner-box .carousel-btn {
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.5);
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   font-size: 1.5rem;
   cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
-  transition: background 0.2s;
+  transition: background 0.2s, opacity 0.2s;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  &:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+  
+  &.prev {
+    left: 20px;
+  }
+  
+  &.next {
+    right: 20px;
+  }
 }
-.banner-box .carousel-btn:hover {
-  background: rgba(0,0,0,0.7);
+
+// Mobile responsiveness
+@media screen and (max-width: 768px) {
+  .banner-box .carousel-slide {
+    min-height: 150px;
+    padding: 30px 15px;
+  }
+  
+  .banner-main-image {
+    max-height: 200px;
+  }
+  
+  .banner-box .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+    
+    &.prev {
+      left: 10px;
+    }
+    
+    &.next {
+      right: 10px;
+    }
+  }
 }
-.banner-box .carousel-btn.prev {
-  left: -20px; // Move arrow outside carousel content
-}
-.banner-box .carousel-btn.next {
-  right: -20px; // Move arrow outside carousel content
+
+@media screen and (max-width: 480px) {
+  .banner-box .carousel-slide {
+    min-height: 120px;
+    padding: 20px 10px;
+  }
+  
+  .banner-main-image {
+    max-height: 150px;
+  }
+  
+  .banner-box .carousel-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    
+    &.prev {
+      left: 5px;
+    }
+    
+    &.next {
+      right: 5px;
+    }
+  }
 }
 
 
@@ -431,74 +447,20 @@
   }
 }
 
-// Banner two-column layout for main heading content
-.banner-columns {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: $large-width;
+// Banner-columns CSS removed since using carousel-only approach
+
+.banner-image {
+  max-width: 80vw;
+  max-height: 80vw;
   margin: 0 auto;
 }
 
-.banner-col {
-  padding: 1em;
+.banner-box .carousel-btn {
+  width: 30px;
+  height: 30px;
 }
 
-.banner-col-image {
-  flex: 1 1 33.33%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.banner-col-content {
-  flex: 2 1 66.66%;
-}
-
-.banner-image {
-  max-width: 100%;
-  //max-height: 120px;
-  display: block;
-}
-
-// Responsive adjustment for smaller screens
-@media (max-width: 600px) {
-  .banner-columns {
-    flex-direction: column;
-    padding: 10px;
-  }
-  .banner-col-image, .banner-col-content {
-    flex: 1 1 100%;
-    max-width: 100%;
-    padding: 8px;
-  }
-  .banner-image {
-    max-width: 80vw;
-    max-height: 80vw;
-    margin: 0 auto;
-  }
-  .banner-box .carousel-btn {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-
-.agenda-image {
-  background-image: url($agenda);
-}
-
-.antesala-image {
-  background-image: url($antesala);
-}
-
-.despacho-image {
-  background-image: url($despacho);
-}
-
-.sala-image {
-  background-image: url($sala);
-}
+// Asset-specific CSS classes removed since handled via JavaScript
 
 
 .banner-actions {

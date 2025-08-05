@@ -22,9 +22,6 @@
             />
           {{/if}}
         </div>
-        <div class="section-header">
-          {{html-safe (theme-setting "main_heading_content")}}
-        </div>
         <div
           id="banner-content_wrap"
           class={{if
@@ -32,23 +29,26 @@
             "--banner-collapsed"
           }}
         >
-          <div class="row">
+          <div class="banner-carousel-container">
             <div class="carousel" id="versatile-carousel">
-              <button class="carousel-btn prev" type="button" aria-label="Previous slide">&#10094;</button>
+              {{#if this.showCarouselControls}}
+                <button class="carousel-btn prev" type="button" aria-label="Previous slide">&#10094;</button>
+              {{/if}}
               <div class="carousel-track">
-                {{#each this.columnData as |data index|}}
+                {{#each this.bannerSlides as |slide index|}}
                   <div class="carousel-slide{{if (eq index 0) ' active'}}">
-                    <VersatileBannerColumn
-                      @columnContent={{data.content}}
-                      @columnClass={{data.class}}
-                      @categoryTitle={{data.categoryTitle}}
-                      @categoryIcon={{data.categoryIcon}}
-                      @categoryAbout={{data.categoryAbout}}
-                    />
+                    <div class="banner-content">
+                      <p>Slide {{slide.index}} - Content Image: {{slide.contentImage}}</p>
+                      {{#if slide.contentImage}}
+                        <img data-asset-key="{{slide.contentImage}}" alt="{{slide.contentImageAlt}}" class="banner-main-image" />
+                      {{/if}}
+                    </div>
                   </div>
                 {{/each}}
               </div>
-              <button class="carousel-btn next" type="button" aria-label="Next slide">&#10095;</button>
+              {{#if this.showCarouselControls}}
+                <button class="carousel-btn next" type="button" aria-label="Next slide">&#10095;</button>
+              {{/if}}
             </div>
           </div>
         </div>

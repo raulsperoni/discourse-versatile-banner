@@ -69,122 +69,91 @@ plugin_outlet:
     - "below-site-header"
     - "above-main-container"
   refresh: true
-banner_background_image:
-  type: string
-  default: "https://i.imgur.com/k7SnZth.jpg"
-banner_background_image_dark:
-  type: string
-  default: ""
-background_color:
+banner_1_enabled:
+  type: bool
+  default: true
+  description: "Enable the first banner slide"
+banner_1_background_color:
   type: string
   default: "#EED4A1"
-background_color_dark:
+  description: "Background color for the first banner"
+banner_1_background_color_dark:
   type: string
   default: ""
-primary_text_color:
-  type: string
-  default: "#000"
-primary_text_color_dark:
+  description: "Dark mode background color for the first banner"
+banner_1_background_image:
   type: string
   default: ""
-secondary_text_color:
+  description: "Background image URL for the first banner (optional)"
+banner_1_background_image_dark:
+  type: string
+  default: ""
+  description: "Dark mode background image URL for the first banner (optional)"
+banner_1_content_image:
+  type: string
+  default: "des1"
+  description: "Main content image for the first banner (use asset name from about.json)"
+banner_1_content_image_alt:
+  type: string
+  default: "Banner 1 Image"
+  description: "Alt text for the first banner image"
+
+banner_2_enabled:
+  type: bool
+  default: false
+  description: "Enable the second banner slide"
+banner_2_background_color:
   type: string
   default: "#FF6C00"
-secondary_text_color_dark:
+  description: "Background color for the second banner"
+banner_2_background_color_dark:
   type: string
   default: ""
-link_text_color:
+  description: "Dark mode background color for the second banner"
+banner_2_background_image:
+  type: string
+  default: ""
+  description: "Background image URL for the second banner (optional)"
+banner_2_background_image_dark:
+  type: string
+  default: ""
+  description: "Dark mode background image URL for the second banner (optional)"
+banner_2_content_image:
+  type: string
+  default: "des2"
+  description: "Main content image for the second banner (use asset name from about.json)"
+banner_2_content_image_alt:
+  type: string
+  default: "Banner 2 Image"
+  description: "Alt text for the second banner image"
+
+banner_3_enabled:
+  type: bool
+  default: false
+  description: "Enable the third banner slide"
+banner_3_background_color:
   type: string
   default: "#0f82af"
-link_text_color_dark:
+  description: "Background color for the third banner"
+banner_3_background_color_dark:
   type: string
   default: ""
-main_heading_content:
-  type: string
-  textarea: true
-  default: |
-    <div class="banner-columns">
-    <div class="banner-col banner-col-image">
-      <img src="{{asset-path 'images/my-banner-image.png'}}" alt="Banner Image" class="banner-image" />
-    </div>
-    <div class="banner-col banner-col-content">
-      <h2 class="x-title">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      </h2>
-      <div class="colored-line"></div>
-      <div class="description">
-        <p>
-          Nulla ullamcorper augue vel sodales pellentesque. Sed
-          vitae sapien sit amet mauris consequat malesuada.
-          Vestibulum vitae iaculis nisl, vel aliquet velit.
-          Fusce venenatis laoreet diam, non dictum nisl
-          vestibulum non.
-        </p>
-      </div>
-      <div class="colored-line"></div>
-    </div>
-    </div>
-first_column_content:
-  type: string
-  textarea: true
-  default: |
-    <h3>A simple box</h3>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Sed id congue eros, sit amet suscipit libero. Nunc vitae
-      placerat est.
-    </p>
-    <div class="banner-list">
-      <ul>
-        <li><a href="https://twitter.com/discourse" target="_blank">A tweet</a> to wake up my friends</li>
-        <li>Put the photos in the bag</li>
-        <li>Rearrange books in the study</li>
-        <li>And the notes?</li>
-      </ul>
-    </div>
-second_column_content:
-  type: string
-  textarea: true
-  default: ""
-third_column_content:
-  type: string
-  textarea: true
-  default: ""
-fourth_column_content:
-  type: string
-  textarea: true
-  default: ""
-first_column_size:
-  type: string
-  default: "auto"
-second_column_size:
-  type: string
-  default: "auto"
-third_column_size:
-  type: string
-  default: "auto"
-fourth_column_size:
+  description: "Dark mode background color for the third banner"
+banner_3_background_image:
   type: string
   default: ""
-first_column_category_id:
-  type: integer
-  default: 0
-  description: "Category ID for first column (0 = none)"
-second_column_category_id:
-  type: integer
-  default: 0
-  description: "Category ID for second column (0 = none)"
-third_column_category_id:
-  type: integer
-  default: 0
-  description: "Category ID for third column (0 = none)"
-fourth_column_category_id:
-  type: integer
-  default: 0
-  description: "Category ID for fourth column (0 = none)"
-third_column_icon:
-  type: string
-  default: "wrench"
-fourth_column_icon:
+  description: "Background image URL for the third banner (optional)"
+banner_3_background_image_dark:
   type: string
   default: ""
+  description: "Dark mode background image URL for the third banner (optional)"
+banner_3_content_image:
+  type: string
+  default: "agenda"
+  description: "Main content image for the third banner (use asset name from about.json)"
+banner_3_content_image_alt:
+  type: string
+  default: "Banner 3 Image"
+  description: "Alt text for the third banner image"
+
+# All column-related settings removed since using carousel-only approach
