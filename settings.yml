@@ -72,88 +72,163 @@ plugin_outlet:
 banner_1_enabled:
   type: bool
   default: true
-  description: "Enable the first banner slide"
+  description: "Habilitar la primera diapositiva del banner"
 banner_1_background_color:
   type: string
   default: "#EED4A1"
-  description: "Background color for the first banner"
+  description: "Color de fondo para el primer banner"
 banner_1_background_color_dark:
   type: string
   default: ""
-  description: "Dark mode background color for the first banner"
+  description: "Color de fondo en modo oscuro para el primer banner"
 banner_1_background_image:
   type: string
   default: ""
-  description: "Background image URL for the first banner (optional)"
+  description: "URL de imagen de fondo para el primer banner (opcional)"
 banner_1_background_image_dark:
   type: string
   default: ""
-  description: "Dark mode background image URL for the first banner (optional)"
+  description: "URL de imagen de fondo en modo oscuro para el primer banner (opcional)"
 banner_1_content_image:
   type: string
   default: "des1"
-  description: "Main content image for the first banner (use asset name from about.json)"
+  description: "Imagen principal del contenido para el primer banner (usar nombre del asset de about.json)"
 banner_1_content_image_alt:
   type: string
   default: "Banner 1 Image"
-  description: "Alt text for the first banner image"
+  description: "Texto alternativo para la imagen del primer banner"
+banner_1_badge_text:
+  type: string
+  default: "PENSAR, DISENTIR, ACORDAR Y CONSTRUIR"
+  description: "Texto de la etiqueta mostrada arriba de la pregunta para el primer banner"
+banner_1_question_text:
+  type: string
+  textarea: true
+  default: "¿Qué te hace sentir/pensar que tu participación en el Despacho 23 es valiosa?"
+  description: "Texto de la pregunta principal para el primer banner"
+banner_1_cta_text:
+  type: string
+  default: "¡Contanos tu opinión para mejorarla!"
+  description: "Texto del botón de llamada a la acción para el primer banner"
+banner_1_cta_link:
+  type: string
+  default: ""
+  description: "Enlace del botón de llamada a la acción para el primer banner"
+banner_1_cta_bg_color:
+  type: string
+  default: "#ec4899"
+  description: "Color de fondo del botón de llamada a la acción para el primer banner"
+banner_1_cta_text_color:
+  type: string
+  default: "#ffffff"
+  description: "Color del texto del botón de llamada a la acción para el primer banner"
 
 banner_2_enabled:
   type: bool
   default: false
-  description: "Enable the second banner slide"
+  description: "Habilitar la segunda diapositiva del banner"
 banner_2_background_color:
   type: string
   default: "#FF6C00"
-  description: "Background color for the second banner"
+  description: "Color de fondo para el segundo banner"
 banner_2_background_color_dark:
   type: string
   default: ""
-  description: "Dark mode background color for the second banner"
+  description: "Color de fondo en modo oscuro para el segundo banner"
 banner_2_background_image:
   type: string
   default: ""
-  description: "Background image URL for the second banner (optional)"
+  description: "URL de imagen de fondo para el segundo banner (opcional)"
 banner_2_background_image_dark:
   type: string
   default: ""
-  description: "Dark mode background image URL for the second banner (optional)"
+  description: "URL de imagen de fondo en modo oscuro para el segundo banner (opcional)"
 banner_2_content_image:
   type: string
   default: "des2"
-  description: "Main content image for the second banner (use asset name from about.json)"
+  description: "Imagen principal del contenido para el segundo banner (usar nombre del asset de about.json)"
 banner_2_content_image_alt:
   type: string
   default: "Banner 2 Image"
-  description: "Alt text for the second banner image"
+  description: "Texto alternativo para la imagen del segundo banner"
+banner_2_badge_text:
+  type: string
+  default: "COLABORAR Y CREAR"
+  description: "Texto de la etiqueta mostrada arriba de la pregunta para el segundo banner"
+banner_2_question_text:
+  type: string
+  textarea: true
+  default: "¿Cómo podemos mejorar juntos nuestro espacio de trabajo?"
+  description: "Texto de la pregunta principal para el segundo banner"
+banner_2_cta_text:
+  type: string
+  default: "¡Únete a la conversación!"
+  description: "Texto del botón de llamada a la acción para el segundo banner"
+banner_2_cta_link:
+  type: string
+  default: ""
+  description: "Enlace del botón de llamada a la acción para el segundo banner"
+banner_2_cta_bg_color:
+  type: string
+  default: "#FF6C00"
+  description: "Color de fondo del botón de llamada a la acción para el segundo banner"
+banner_2_cta_text_color:
+  type: string
+  default: "#ffffff"
+  description: "Color del texto del botón de llamada a la acción para el segundo banner"
 
 banner_3_enabled:
   type: bool
   default: false
-  description: "Enable the third banner slide"
+  description: "Habilitar la tercera diapositiva del banner"
 banner_3_background_color:
   type: string
   default: "#0f82af"
-  description: "Background color for the third banner"
+  description: "Color de fondo para el tercer banner"
 banner_3_background_color_dark:
   type: string
   default: ""
-  description: "Dark mode background color for the third banner"
+  description: "Color de fondo en modo oscuro para el tercer banner"
 banner_3_background_image:
   type: string
   default: ""
-  description: "Background image URL for the third banner (optional)"
+  description: "URL de imagen de fondo para el tercer banner (opcional)"
 banner_3_background_image_dark:
   type: string
   default: ""
-  description: "Dark mode background image URL for the third banner (optional)"
+  description: "URL de imagen de fondo en modo oscuro para el tercer banner (opcional)"
 banner_3_content_image:
   type: string
   default: "agenda"
-  description: "Main content image for the third banner (use asset name from about.json)"
+  description: "Imagen principal del contenido para el tercer banner (usar nombre del asset de about.json)"
 banner_3_content_image_alt:
   type: string
   default: "Banner 3 Image"
-  description: "Alt text for the third banner image"
+  description: "Texto alternativo para la imagen del tercer banner"
+banner_3_badge_text:
+  type: string
+  default: "CONECTAR Y COMPARTIR"
+  description: "Texto de la etiqueta mostrada arriba de la pregunta para el tercer banner"
+banner_3_question_text:
+  type: string
+  textarea: true
+  default: "¿Qué ideas tienes para fortalecer nuestra comunidad?"
+  description: "Texto de la pregunta principal para el tercer banner"
+banner_3_cta_text:
+  type: string
+  default: "¡Comparte tus ideas!"
+  description: "Texto del botón de llamada a la acción para el tercer banner"
+banner_3_cta_link:
+  type: string
+  default: ""
+  description: "Enlace del botón de llamada a la acción para el tercer banner"
+banner_3_cta_bg_color:
+  type: string
+  default: "#0f82af"
+  description: "Color de fondo del botón de llamada a la acción para el tercer banner"
+banner_3_cta_text_color:
+  type: string
+  default: "#ffffff"
+  description: "Color del texto del botón de llamada a la acción para el tercer banner"
 
 # All column-related settings removed since using carousel-only approach

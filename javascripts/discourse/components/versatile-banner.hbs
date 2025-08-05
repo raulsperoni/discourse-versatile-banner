@@ -38,9 +38,29 @@
                 {{#each this.bannerSlides as |slide index|}}
                   <div class="carousel-slide{{if (eq index 0) ' active'}}">
                     <div class="banner-content">
-                      <p>Slide {{slide.index}} - Content Image: {{slide.contentImage}}</p>
                       {{#if slide.contentImage}}
-                        <img data-asset-key="{{slide.contentImage}}" alt="{{slide.contentImageAlt}}" class="banner-main-image" />
+                        <div class="banner-image-container">
+                          <img data-asset-key="{{slide.contentImage}}" alt="{{slide.contentImageAlt}}" class="banner-main-image" />
+                        </div>
+                      {{/if}}
+                      
+                      <div class="banner-question-box">
+                        <div class="banner-badge">{{if slide.badgeText slide.badgeText "TEST BADGE"}}</div>
+                        <div class="banner-question">{{if slide.questionText slide.questionText "Test question text to ensure visibility"}}</div>
+                      </div>
+                      
+                      {{#if slide.ctaText}}
+                        <div class="banner-cta">
+                          {{#if slide.ctaLink}}
+                            <a href="{{slide.ctaLink}}" class="banner-cta-button" data-cta-bg="{{slide.ctaBgColor}}" data-cta-text="{{slide.ctaTextColor}}">
+                              {{slide.ctaText}}
+                            </a>
+                          {{else}}
+                            <button class="banner-cta-button" data-cta-bg="{{slide.ctaBgColor}}" data-cta-text="{{slide.ctaTextColor}}">
+                              {{slide.ctaText}}
+                            </button>
+                          {{/if}}
+                        </div>
                       {{/if}}
                     </div>
                   </div>

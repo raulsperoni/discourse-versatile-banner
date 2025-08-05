@@ -34,6 +34,13 @@ export default class VersatileBanner extends Component {
           imgElement.src = settings.theme_uploads[slide.contentImage];
           console.log(`[DEBUG] Set image src for slide ${idx + 1}: ${settings.theme_uploads[slide.contentImage]}`);
         }
+        
+        // Apply CTA button styles
+        const ctaButton = slideElement.querySelector('.banner-cta-button');
+        if (ctaButton && slide.ctaBgColor && slide.ctaTextColor) {
+          ctaButton.style.backgroundColor = slide.ctaBgColor;
+          ctaButton.style.color = slide.ctaTextColor;
+        }
       }
     });
     
@@ -188,6 +195,15 @@ export default class VersatileBanner extends Component {
       const bgImageDark = settings[`banner_${i}_background_image_dark`];
       const contentImg = settings[`banner_${i}_content_image`];
       const contentImgAlt = settings[`banner_${i}_content_image_alt`];
+      const badgeText = settings[`banner_${i}_badge_text`];
+      const questionText = settings[`banner_${i}_question_text`];
+      
+      console.log(`[DEBUG] Raw settings for banner ${i}:`, {
+        enabled,
+        badgeText,
+        questionText,
+        contentImg
+      });
       
       if (enabled) {
         // Validate and clean the values to prevent WeakMap errors
@@ -217,8 +233,22 @@ export default class VersatileBanner extends Component {
           backgroundImageDark: cleanBackgroundImage(bgImageDark),
           contentImage: cleanBackgroundImage(contentImg), // Also clean content image for $ prefix
           contentImageAlt: cleanValue(contentImgAlt),
+          // Content settings
+          badgeText: cleanValue(badgeText),
+          questionText: cleanValue(questionText),
+          // CTA settings
+          ctaText: cleanValue(settings[`banner_${i}_cta_text`]),
+          ctaLink: cleanValue(settings[`banner_${i}_cta_link`]),
+          ctaBgColor: cleanValue(settings[`banner_${i}_cta_bg_color`]),
+          ctaTextColor: cleanValue(settings[`banner_${i}_cta_text_color`]),
         };
-        console.log(`[DEBUG] Final slide ${i} contentImage: "${slide.contentImage}", backgroundImage: "${slide.backgroundImage}"`);
+        console.log(`[DEBUG] Final slide ${i}:`, {
+          contentImage: slide.contentImage,
+          backgroundImage: slide.backgroundImage,
+          badgeText: slide.badgeText,
+          questionText: slide.questionText,
+          ctaText: slide.ctaText
+        });
         slides.push(slide);
       }
     }
