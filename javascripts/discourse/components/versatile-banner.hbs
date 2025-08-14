@@ -49,6 +49,12 @@
                         <div class="banner-question">{{if slide.questionText slide.questionText "Test question text to ensure visibility"}}</div>
                       </div>
                       
+                      {{#if slide.descriptionText}}
+                        <div class="banner-description">
+                          {{slide.descriptionText}}
+                        </div>
+                      {{/if}}
+                      
                       {{#if slide.ctaText}}
                         <div class="banner-cta">
                           {{#if slide.ctaLink}}

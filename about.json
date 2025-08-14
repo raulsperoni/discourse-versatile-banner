@@ -4,7 +4,7 @@
   "license_url": "https://github.com/tshenry/discourse-versatile-banner/blob/main/LICENSE",
   "component": true,
   "assets": {
-    "des1": "assets/images/des1.png",
+    "pregunta-36": "assets/images/pregunta-36.png",
     "des2": "assets/images/des2.png",
     "agenda": "assets/images/agenda.png",
     "antesala": "assets/images/antesala.png",

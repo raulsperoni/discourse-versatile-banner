@@ -58,7 +58,7 @@ cookie_name:
   default: "v1"
 full_width_banner:
   type: bool
-  default: false
+  default: true
 swap_default_positioning:
   type: bool
   default: false
@@ -75,7 +75,7 @@ banner_1_enabled:
   description: "Habilitar la primera diapositiva del banner"
 banner_1_background_color:
   type: string
-  default: "#EED4A1"
+  default: "#f2f2f2"
   description: "Color de fondo para el primer banner"
 banner_1_background_color_dark:
   type: string
@@ -91,7 +91,7 @@ banner_1_background_image_dark:
   description: "URL de imagen de fondo en modo oscuro para el primer banner (opcional)"
 banner_1_content_image:
   type: string
-  default: "des1"
+  default: "$banner-pregunta-36"
   description: "Imagen principal del contenido para el primer banner (usar nombre del asset de about.json)"
 banner_1_content_image_alt:
   type: string
@@ -104,8 +104,13 @@ banner_1_badge_text:
 banner_1_question_text:
   type: string
   textarea: true
-  default: "¿Qué te hace sentir/pensar que tu participación en el Despacho 23 es valiosa?"
+  default: "¿Cómo podemos construir una participación significativa?"
   description: "Texto de la pregunta principal para el primer banner"
+banner_1_description_text:
+  type: string
+  textarea: true
+  default: "Tu palabra importa, tu mirada cuenta, tu experiencia también es política"
+  description: "Texto descriptivo mostrado entre la pregunta y el botón CTA para el primer banner"
 banner_1_cta_text:
   type: string
   default: "¡Contanos tu opinión para mejorarla!"
@@ -116,7 +121,7 @@ banner_1_cta_link:
   description: "Enlace del botón de llamada a la acción para el primer banner"
 banner_1_cta_bg_color:
   type: string
-  default: "#ec4899"
+  default: "#E51675"
   description: "Color de fondo del botón de llamada a la acción para el primer banner"
 banner_1_cta_text_color:
   type: string
@@ -160,6 +165,11 @@ banner_2_question_text:
   textarea: true
   default: "¿Cómo podemos mejorar juntos nuestro espacio de trabajo?"
   description: "Texto de la pregunta principal para el segundo banner"
+banner_2_description_text:
+  type: string
+  textarea: true
+  default: ""
+  description: "Texto descriptivo mostrado entre la pregunta y el botón CTA para el segundo banner"
 banner_2_cta_text:
   type: string
   default: "¡Únete a la conversación!"
@@ -214,6 +224,11 @@ banner_3_question_text:
   textarea: true
   default: "¿Qué ideas tienes para fortalecer nuestra comunidad?"
   description: "Texto de la pregunta principal para el tercer banner"
+banner_3_description_text:
+  type: string
+  textarea: true
+  default: ""
+  description: "Texto descriptivo mostrado entre la pregunta y el botón CTA para el tercer banner"
 banner_3_cta_text:
   type: string
   default: "¡Comparte tus ideas!"

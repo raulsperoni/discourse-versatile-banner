@@ -315,7 +315,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
   
   &.active {
     opacity: 1;
@@ -338,13 +337,7 @@
   margin: 0 auto;
 }
 
-.banner-main-image {
-  max-width: 100%;
-  max-height: 300px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
+// Removed duplicate - handled below
 
 // Carousel controls
 .banner-box .carousel-btn {
@@ -384,11 +377,15 @@
 @media screen and (max-width: 768px) {
   .banner-box .carousel-slide {
     min-height: 150px;
-    padding: 30px 15px;
+  }
+  
+  .banner-image-container {
+    padding-top: 20px; // Less padding on tablet
   }
   
   .banner-main-image {
-    max-height: 200px;
+    max-width: 200px; // Smaller on tablet
+    max-height: 180px;
   }
   
   .banner-box .carousel-btn {
@@ -409,11 +406,15 @@
 @media screen and (max-width: 480px) {
   .banner-box .carousel-slide {
     min-height: 120px;
-    padding: 20px 10px;
+  }
+  
+  .banner-image-container {
+    padding-top: 15px; // Minimal padding on mobile
   }
   
   .banner-main-image {
-    max-height: 150px;
+    max-width: 180px; // Bigger on mobile than before
+    max-height: 160px; // Bigger on mobile
   }
   
   .banner-box .carousel-btn {
@@ -464,7 +465,7 @@
 
 // Banner Content Structure
 .banner-content {
-  max-width: 500px;
+  max-width: 100%; // Allow full width so children can control their own width
   width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -478,9 +479,9 @@
 }
 
 .banner-image-container {
-  margin-bottom: 10px;
+  padding-top: 30px; // Added padding top for desktop
+  margin-bottom: 20px;
   flex-shrink: 0;
-  min-height: 60px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -488,8 +489,9 @@
 }
 
 .banner-main-image {
-  max-width: 33.33%; // Reduced to 1/3 of original size
-  max-height: 100px; // Reduced from 300px to 100px
+  max-width: 250px; // Reasonable size on desktop
+  width: 100%;
+  max-height: 200px; // Smaller height on desktop
   height: auto;
   display: block;
   margin: 0 auto;
@@ -499,28 +501,46 @@
 // Question Box (inspired design)
 .banner-question-box {
   background: white;
-  padding: 60px 40px 40px 40px;
-  margin-bottom: 24px;
+  padding: 70px 60px 50px 60px;
+  margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   position: relative;
   border-radius: 0; // Clean design without border radius
   z-index: 10; // Ensure it appears above other elements
   width: 100%;
-  max-width: 400px;
+  max-width: 650px; // Increased from 400px
+}
+
+// Description text between question box and CTA
+.banner-description {
+  color: #333;
+  font-size: 16px; // Reduced back to 16px
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 1000px; // Much wider for description
+  width: 100%;
+  padding: 0 20px;
+  text-align: center;
+  font-weight: 400;
+  
+  // Dark mode support
+  .dark-scheme & {
+    color: #f0f0f0;
+  }
 }
 
 // Badge (inspired design)
 .banner-badge {
   background: #1a1a1a;
   color: white;
-  padding: 8px 16px;
+  padding: 10px 20px;
   display: inline-block;
-  font-size: 12px;
+  font-size: 14px; // Increased from 12px
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   position: absolute;
-  top: -12px;
+  top: -14px; // Adjusted for larger size
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
@@ -530,7 +550,7 @@
 // Question Text (inspired design)
 .banner-question {
   color: #1a1a1a;
-  font-size: 20px;
+  font-size: 28px; // Increased from 20px
   line-height: 1.35;
   font-weight: 600;
   letter-spacing: -0.3px;
@@ -540,16 +560,18 @@
 // Call to Action Button (inspired design)
 .banner-cta {
   text-align: center;
+  padding-bottom: 30px; // Added padding bottom
 }
 
 .banner-cta-button {
-  background: #ec4899;
-  color: white;
+  // Default fallback colors - will be overridden by settings via JavaScript
+  background-color: #E51675;
+  color: #ffffff;
   border: none;
   padding: 12px 24px;
   border-radius: 24px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 700; // Changed from 500 to 700 for bold
   cursor: pointer;
   display: inline-block;
   text-decoration: none;
@@ -567,14 +589,43 @@
   }
 }
 
-// Mobile adjustments (inspired design)
-@media (max-width: 480px) {
+// Tablet adjustments
+@media (max-width: 768px) {
   .banner-question-box {
-    padding: 60px 20px 40px 20px;
+    max-width: 500px;
+    padding: 65px 45px 45px 45px;
   }
   
   .banner-question {
-    font-size: 20px;
+    font-size: 24px;
+  }
+  
+  .banner-description {
+    font-size: 15px; // Smaller on tablet
+    max-width: 700px; // Much wider on tablet
+  }
+}
+
+// Mobile adjustments (inspired design)
+@media (max-width: 480px) {
+  .banner-question-box {
+    padding: 60px 30px 40px 30px;
+    max-width: 90%; // Responsive on mobile
+  }
+  
+  .banner-question {
+    font-size: 22px; // Still larger but mobile-friendly
+  }
+  
+  .banner-description {
+    font-size: 14px; // Smaller on mobile
+    padding: 0 15px;
+    max-width: 90%;
+  }
+  
+  .banner-badge {
+    font-size: 12px; // Slightly smaller on mobile
+    padding: 8px 16px;
   }
   
   .banner-content {

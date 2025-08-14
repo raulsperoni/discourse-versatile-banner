@@ -14,35 +14,59 @@ export default class VersatileBanner extends Component {
   // Carousel logic
   @action
   didInsertCarousel(element) {
+    // Apply background color to the banner-box if there's a primary slide
+    if (this.bannerSlides.length > 0 && this.bannerSlides[0].backgroundColor) {
+      element.style.backgroundColor = this.bannerSlides[0].backgroundColor;
+    }
+    
     const carousel = element.querySelector('#versatile-carousel');
     if (!carousel) return;
     
-    // Set background images and content images via JavaScript since helpers cause WeakMap errors
-    this.bannerSlides.forEach((slide, idx) => {
-      const slideElement = carousel.querySelector(`.carousel-slide:nth-child(${idx + 1})`);
-      if (slideElement) {
-        // Set background image
-        if (slide.backgroundImage && settings.theme_uploads[slide.backgroundImage]) {
-          slideElement.style.backgroundImage = `url(${settings.theme_uploads[slide.backgroundImage]})`;
-          slideElement.style.backgroundSize = 'cover';
-          slideElement.style.backgroundPosition = 'center';
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      // Set background images and content images via JavaScript since helpers cause WeakMap errors
+      this.bannerSlides.forEach((slide, idx) => {
+        // Use the correct selector for slides within carousel-track
+        const slideElement = carousel.querySelector(`.carousel-track .carousel-slide:nth-child(${idx + 1})`);
+        if (slideElement) {
+          // Set background color
+          if (slide.backgroundColor) {
+            slideElement.style.backgroundColor = slide.backgroundColor;
+          }
+          
+          // Set background image
+          if (slide.backgroundImage && settings.theme_uploads[slide.backgroundImage]) {
+            slideElement.style.backgroundImage = `url(${settings.theme_uploads[slide.backgroundImage]})`;
+            slideElement.style.backgroundSize = 'cover';
+            slideElement.style.backgroundPosition = 'center';
+          }
+          
+          // Set content image src
+          const imgElement = slideElement.querySelector('.banner-main-image');
+          if (imgElement && slide.contentImage && settings.theme_uploads[slide.contentImage]) {
+            imgElement.src = settings.theme_uploads[slide.contentImage];
+            console.log(`[DEBUG] Set image src for slide ${idx + 1}: ${settings.theme_uploads[slide.contentImage]}`);
+          }
+          
+          // Apply CTA button styles - look for both <a> and <button> elements
+          const ctaButton = slideElement.querySelector('.banner-cta-button');
+          if (ctaButton) {
+            console.log(`[DEBUG] Applying CTA colors to slide ${idx + 1}:`, {
+              bgColor: slide.ctaBgColor,
+              textColor: slide.ctaTextColor
+            });
+            if (slide.ctaBgColor) {
+              ctaButton.style.backgroundColor = slide.ctaBgColor;
+            }
+            if (slide.ctaTextColor) {
+              ctaButton.style.color = slide.ctaTextColor;
+            }
+          } else {
+            console.log(`[DEBUG] No CTA button found for slide ${idx + 1}`);
+          }
         }
-        
-        // Set content image src
-        const imgElement = slideElement.querySelector('.banner-main-image');
-        if (imgElement && slide.contentImage && settings.theme_uploads[slide.contentImage]) {
-          imgElement.src = settings.theme_uploads[slide.contentImage];
-          console.log(`[DEBUG] Set image src for slide ${idx + 1}: ${settings.theme_uploads[slide.contentImage]}`);
-        }
-        
-        // Apply CTA button styles
-        const ctaButton = slideElement.querySelector('.banner-cta-button');
-        if (ctaButton && slide.ctaBgColor && slide.ctaTextColor) {
-          ctaButton.style.backgroundColor = slide.ctaBgColor;
-          ctaButton.style.color = slide.ctaTextColor;
-        }
-      }
-    });
+      });
+    }); // End of requestAnimationFrame
     
     const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
     const prevBtn = carousel.querySelector('.carousel-btn.prev');
@@ -72,13 +96,18 @@ export default class VersatileBanner extends Component {
     };
 
     // Apply dark mode styles dynamically
-    slides.forEach((slide) => {
-      const darkBgColor = slide.dataset.darkBackgroundColor;
-      const darkBgImage = slide.dataset.darkBackgroundImage;
-      
-      if (darkBgColor || darkBgImage) {
-        slide.style.setProperty('--data-dark-background-color', darkBgColor || '');
-        slide.style.setProperty('--data-dark-background-image', darkBgImage ? `url(${darkBgImage})` : '');
+    slides.forEach((slide, idx) => {
+      const slideData = this.bannerSlides[idx];
+      if (slideData) {
+        const darkBgColor = slideData.backgroundColorDark;
+        const darkBgImage = slideData.backgroundImageDark;
+        
+        if (darkBgColor) {
+          slide.style.setProperty('--data-dark-background-color', darkBgColor);
+        }
+        if (darkBgImage && settings.theme_uploads[darkBgImage]) {
+          slide.style.setProperty('--data-dark-background-image', `url(${settings.theme_uploads[darkBgImage]})`);
+        }
       }
     });
 
@@ -236,6 +265,7 @@ export default class VersatileBanner extends Component {
           // Content settings
           badgeText: cleanValue(badgeText),
           questionText: cleanValue(questionText),
+          descriptionText: cleanValue(settings[`banner_${i}_description_text`]),
           // CTA settings
           ctaText: cleanValue(settings[`banner_${i}_cta_text`]),
           ctaLink: cleanValue(settings[`banner_${i}_cta_link`]),
